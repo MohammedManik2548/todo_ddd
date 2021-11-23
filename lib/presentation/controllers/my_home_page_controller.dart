@@ -4,7 +4,6 @@ import 'package:todo_ddd/application/use_cases/delete_todo_use_case.dart';
 import 'package:todo_ddd/application/use_cases/get_all_todo_use_case.dart';
 import 'package:todo_ddd/application/use_cases/save_todo_use_case.dart';
 import 'package:todo_ddd/domain/entities/entity.dart';
-import 'package:todo_ddd/domain/repositories/repository.dart';
 
 class MyHomePageController extends GetxController {
   final GetAllTodoUseCase _getAllTodoUseCase;
@@ -37,5 +36,11 @@ class MyHomePageController extends GetxController {
   void onInit() async {
     super.onInit();
     await getTodos();
+  }
+
+  deleteTodo(int id) async {
+    final response = await _deleteTodoUseCase.call(id);
+
+    todos.assignAll(response);
   }
 }

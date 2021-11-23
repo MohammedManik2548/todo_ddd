@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
+import 'package:todo_ddd/presentation/_bindings/app_binding.dart';
 import 'package:todo_ddd/presentation/controllers/my_home_page_controller.dart';
+
+import 'edit_page.dart';
 
 class MyHomePage extends GetView<MyHomePageController> {
   final formKey = GlobalKey<FormState>();
@@ -34,7 +37,7 @@ class MyHomePage extends GetView<MyHomePageController> {
                     decoration: InputDecoration(labelText: 'Enter Description'),
                   ),
                   ElevatedButton(
-                    onPressed: () async{
+                    onPressed: () async {
                       if (formKey.currentState!.validate()) {
                         formKey.currentState!.save();
 
@@ -54,9 +57,20 @@ class MyHomePage extends GetView<MyHomePageController> {
                   itemBuilder: (context, index) {
                     final todo = controller.todos[index];
                     return ListTile(
-                      leading: Text('${todo.id}'),
+                      leading: todo.isCompleted
+                          ? Icon(Icons.check)
+                          : Icon(Icons.close),
                       title: Text('${todo.description}'),
-                      selected: todo.isCompleted,
+                      trailing: IconButton(
+                        icon: Icon(Icons.edit),
+                        onPressed: () {
+                          Get.to(() => MyEditPage(),
+                              arguments: todo, binding: AppBinding());
+                        },
+                      ),
+                      onLongPress: () async {
+                        await controller.deleteTodo(todo.id);
+                      },
                     );
                   },
                 ),

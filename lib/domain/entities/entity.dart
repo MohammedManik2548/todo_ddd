@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 class TodoItem {
   TodoItem({
     required this.id,
@@ -22,19 +20,5 @@ class TodoItem {
         isCompleted: isCompleted ?? this.isCompleted,
       );
 
-  factory TodoItem.fromJson(String str) => TodoItem.fromMap(json.decode(str));
 
-  String toJson() => json.encode(toMap());
-
-  factory TodoItem.fromMap(Map<String, dynamic> json) => TodoItem(
-    id: json["id"],
-    description: json["description"],
-    isCompleted: json["isCompleted"],
-  );
-
-  Map<String, dynamic> toMap() => {
-    "id": id,
-    "description": description,
-    "isCompleted": isCompleted,
-  };
 }
