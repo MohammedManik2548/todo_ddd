@@ -16,8 +16,9 @@ class MyEditPageController extends GetxController {
   updateTodo() async {
     final response = await _updateTodoUseCase.call(TodoItem(
       id: id.value,
-      description: description.value,
-      isCompleted: isCompleted.value,
+      name: description.value,
+      isComplete: isCompleted.value,
+      createdAt: DateTime.now(),
     ));
 
     final homePageController = Get.find<MyHomePageController>();
@@ -31,7 +32,7 @@ class MyEditPageController extends GetxController {
     final todo = Get.arguments as TodoItem;
 
     id.value = todo.id;
-    description.value = todo.description;
-    isCompleted.value = todo.isCompleted;
+    description.value = todo.name;
+    isCompleted.value = todo.isComplete;
   }
 }

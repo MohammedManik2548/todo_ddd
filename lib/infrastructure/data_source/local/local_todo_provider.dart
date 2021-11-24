@@ -43,6 +43,8 @@ class LocalTodoProviderImpl implements LocalTodoProvider {
   Future<List<TodoItemModel>> getAllTodoItem() async {
     var todoStr = await _storage.read(_todoKey);
 
+    
+
     List<TodoItemModel> list = [];
 
     if (todoStr != null) {

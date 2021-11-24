@@ -4,6 +4,7 @@ import 'package:todo_ddd/application/use_cases/delete_todo_use_case.dart';
 import 'package:todo_ddd/application/use_cases/get_all_todo_use_case.dart';
 import 'package:todo_ddd/application/use_cases/save_todo_use_case.dart';
 import 'package:todo_ddd/domain/entities/entity.dart';
+import 'package:darq/darq.dart';
 
 class MyHomePageController extends GetxController {
   final GetAllTodoUseCase _getAllTodoUseCase;
@@ -21,15 +22,20 @@ class MyHomePageController extends GetxController {
   );
 
   saveTodo() async {
-    var newTodo = TodoItem(id: id.value, description: description.value);
+    var newTodo = TodoItem(
+      id: id.value,
+      name: description.value,
+      createdAt: DateTime.now(),
+    );
 
     await _saveTodoUseCase.call(newTodo);
   }
 
   getTodos() async {
     final result = await _getAllTodoUseCase.call(EmptyRequest());
+    var sorted = result.orderByDescending((element) => element.createdAt.millisecondsSinceEpoch);
 
-    todos.assignAll(result);
+    todos.assignAll(sorted);
   }
 
   @override

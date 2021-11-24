@@ -1,23 +1,27 @@
 class TodoItem {
   TodoItem({
     required this.id,
-    required this.description,
-    this.isCompleted=false,
+    required this.name,
+    required this.createdAt,
+    this.isComplete=false,
   });
 
   int id;
-  String description;
-  bool isCompleted;
+  String name;
+  bool isComplete;
+  DateTime createdAt;
 
   TodoItem copyWith({
     int? id,
-    String? description,
-    bool? isCompleted,
+    String? name,
+    bool? isComplete,
+    DateTime? createdAt,
   }) =>
       TodoItem(
         id: id ?? this.id,
-        description: description ?? this.description,
-        isCompleted: isCompleted ?? this.isCompleted,
+        name: name ?? this.name,
+        isComplete: isComplete ?? this.isComplete,
+        createdAt: createdAt ?? this.createdAt,
       );
 
 

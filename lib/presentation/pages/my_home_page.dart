@@ -57,10 +57,10 @@ class MyHomePage extends GetView<MyHomePageController> {
                   itemBuilder: (context, index) {
                     final todo = controller.todos[index];
                     return ListTile(
-                      leading: todo.isCompleted
+                      leading: todo.isComplete
                           ? Icon(Icons.check)
                           : Icon(Icons.close),
-                      title: Text('${todo.description}'),
+                      title: Text('${todo.name}'),
                       trailing: IconButton(
                         icon: Icon(Icons.edit),
                         onPressed: () {
