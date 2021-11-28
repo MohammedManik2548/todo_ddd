@@ -15,7 +15,7 @@ class AppBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut<LocalTodoProvider>(() => LocalTodoProviderImpl());
-    Get.lazyPut<RemoteTodoProvider>(() => FireBaseTodoProvider());
+    Get.lazyPut<RemoteTodoProvider>(() => FireBaseTodoProviderImpl());
     Get.lazyPut<TodoRepository>(() => TodoRepositoryImpl(find(),find()));
     Get.lazyPut(() => GetAllTodoUseCase(find()));
     Get.lazyPut(() => SaveTodoUseCase(find()));

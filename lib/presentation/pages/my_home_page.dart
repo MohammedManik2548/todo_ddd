@@ -5,9 +5,12 @@ import 'package:todo_ddd/presentation/_bindings/app_binding.dart';
 import 'package:todo_ddd/presentation/controllers/my_home_page_controller.dart';
 
 import 'edit_page.dart';
+import 'package:intl/intl.dart';
 
 class MyHomePage extends GetView<MyHomePageController> {
   final formKey = GlobalKey<FormState>();
+
+  final DateFormat formatar = DateFormat('dd/MM/yyyy');
 
   @override
   Widget build(BuildContext context) {
@@ -61,6 +64,7 @@ class MyHomePage extends GetView<MyHomePageController> {
                           ? Icon(Icons.check)
                           : Icon(Icons.close),
                       title: Text('${todo.name}'),
+                      subtitle: Text('${formatar.format(todo.createdAt)}'),
                       trailing: IconButton(
                         icon: Icon(Icons.edit),
                         onPressed: () {

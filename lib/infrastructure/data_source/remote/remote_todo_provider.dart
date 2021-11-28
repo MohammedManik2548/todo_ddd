@@ -1,6 +1,4 @@
 import 'dart:convert';
-
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:get/get.dart';
 import 'package:todo_ddd/infrastructure/models/local/todo_item_model.dart';
@@ -65,12 +63,13 @@ class ApiTodoProviderImpl extends GetConnect implements RemoteTodoProvider{
 
 }
 
-class FireBaseTodoProvider implements RemoteTodoProvider{
+class FireBaseTodoProviderImpl implements RemoteTodoProvider{
   @override
   Future<void> addTodoItem({required TodoItemModel todoItem}) async{
     final DatabaseReference db = FirebaseDatabase().reference();
 
     db.child("todos").push().set(todoItem.toMap());
+
   }
 
   @override
